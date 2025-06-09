@@ -1,0 +1,406 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Node Api Documentation",
+        "description": "Node Api Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001/",
+            "description": "local server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books related apis"
+        }
+    ],
+    "paths": {
+        "/books/": {
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Add book Api",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/book_add"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/book_add"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Book listing Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/author"
+                    },
+                    {
+                        "$ref": "#/components/parameters/genre"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Book details Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/search": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Search book Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/search"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/{id}/reviews": {
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Add review to book Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/book_review"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/book_review"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/reviews/{id}": {
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update review to book Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/update_book_review"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/update_book_review"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete review of book Api",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "book_add": {
+                "type": "object",
+                "properties": {
+                    "author": {
+                        "description": "Enter author name",
+                        "type": "string",
+                        "format": "string",
+                        "default": "john doe"
+                    },
+                    "title": {
+                        "description": "Enter book title here",
+                        "type": "string",
+                        "format": "string",
+                        "default": "john"
+                    },
+                    "genre": {
+                        "description": "Enter book title here",
+                        "type": "string",
+                        "format": "string",
+                        "default": "FICTION",
+                        "enum": [
+                            "FICTION",
+                            "NON_FICTION",
+                            "SCIENCE_FICTION",
+                            "FANTASY",
+                            "MYSTERY",
+                            "BIOGRAPHY",
+                            "ROMANCE",
+                            "HISTORY",
+                            "OTHER"
+                        ]
+                    },
+                    "isbn": {
+                        "description": "Enter ISBN here",
+                        "type": "string",
+                        "format": "string",
+                        "default": "12234"
+                    }
+                },
+                "required": [
+                    "author",
+                    "title",
+                    "isbn"
+                ]
+            },
+            "book_review": {
+                "type": "object",
+                "properties": {
+                    "rating": {
+                        "description": "Enter rating here",
+                        "type": "number",
+                        "format": "number",
+                        "default": "1"
+                    },
+                    "comment": {
+                        "description": "Enter comment here",
+                        "type": "string",
+                        "format": "string",
+                        "default": "john"
+                    }
+                },
+                "required": [
+                    "rating",
+                    "comment"
+                ]
+            },
+            "update_book_review": {
+                "type": "object",
+                "properties": {
+                    "rating": {
+                        "description": "Enter rating here",
+                        "type": "number",
+                        "format": "number",
+                        "default": "1"
+                    },
+                    "comment": {
+                        "description": "Enter comment here",
+                        "type": "string",
+                        "format": "string",
+                        "default": "john"
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "page": {
+                "name": "page",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "style": "form",
+                "explode": true
+            },
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "style": "form",
+                "explode": true
+            },
+            "author": {
+                "name": "author",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                },
+                "style": "form",
+                "explode": true
+            },
+            "genre": {
+                "name": "genre",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "enum": [
+                        "FICTION",
+                        "NON_FICTION",
+                        "SCIENCE_FICTION",
+                        "FANTASY",
+                        "MYSTERY",
+                        "BIOGRAPHY",
+                        "ROMANCE",
+                        "HISTORY",
+                        "OTHER"
+                    ]
+                },
+                "style": "form",
+                "explode": true
+            },
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "Pass id here",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "search": {
+                "name": "search",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "style": "form",
+                "explode": true
+            }
+        }
+    }
+}

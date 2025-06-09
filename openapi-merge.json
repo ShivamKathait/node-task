@@ -1,0 +1,11 @@
+{
+    "inputs": [
+        {
+            "inputFile": "./src/modules/users/user.swagger.json"
+        },
+        {
+            "inputFile": "./src/modules/books/books.swagger.json"
+        }
+    ],
+    "output": "./output.openapi.json"
+}

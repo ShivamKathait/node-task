@@ -1,0 +1,127 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Node Api Documentation",
+        "description": "Node Api Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001/",
+            "description": "local server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "User",
+            "description": "User related apis"
+        }
+    ],
+    "paths": {
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Signup Api",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/user_signup"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/user_signup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Login Api",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/user_login"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/user_login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "user_signup": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "description": "Enter your email",
+                        "type": "string",
+                        "format": "email",
+                        "default": "john_doe@gmail.com"
+                    },
+                    "password": {
+                        "description": "Enter your passowrd",
+                        "type": "string",
+                        "format": "password"
+                    },
+                    "full_name": {
+                        "description": "Enter your full name",
+                        "type": "string",
+                        "format": "string",
+                        "default": "john doe"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password",
+                    "full_name"
+                ]
+            },
+            "user_login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "description": "Enter your email",
+                        "type": "string",
+                        "format": "email",
+                        "default": "john_doe@gmail.com"
+                    },
+                    "password": {
+                        "description": "Enter your passowrd",
+                        "type": "string",
+                        "format": "password"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            }
+        }
+    }
+}
